@@ -250,17 +250,4 @@ public class VerificacionTest {
 		Assert.assertTrue(res == 4);
 
 	}
-	@Test
-	public void test7DeleteEntriesInDatabase() throws Exception{
-		String encriptado = AuthorityImpl.Encriptar("rafa maricon");
-		System.out.println(encriptado);
-		System.out.println("---------------------------------------------");
-
-		String desencriptado = AuthorityImpl.Desencriptar(encriptado);
-		System.out.println(desencriptado);
-	}
-	
-	
-	//Esto es una pruebaaa
-
 }
