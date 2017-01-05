@@ -12,6 +12,7 @@ services:
 
 script:
   - mvn test -f pom.xml
+  - mvn clean compile assembly:single
 
 sudo:
     - false

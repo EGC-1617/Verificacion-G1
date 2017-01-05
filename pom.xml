@@ -63,6 +63,7 @@
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 					<appendAssemblyId>false</appendAssemblyId>
+					<finalName>Verificacion1</finalName>
 				</configuration>
 				<executions>
 					<execution>
@@ -72,6 +73,7 @@
 						</goals>
 					</execution>
 				</executions>
+				
 			</plugin>
 			
 			<plugin>
