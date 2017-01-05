@@ -1,4 +1,13 @@
-language: java
+languaje: java
 
-script:
+services: 
+	- mysql
+	
+script: 
 	- mvn test -B
+	
+sudo:
+	- false
+
+notifications:
+	- email: false  # Desactivamos las notificaciones por email para evitar spam
