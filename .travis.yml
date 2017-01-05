@@ -7,7 +7,10 @@ jdk:
   - openjdk7
 
 before_install:
-  - cd test\java\test\java
+  - cd test
+  - cd java
+  - cd test
+  - cd java
   
 services:
     - mysql
