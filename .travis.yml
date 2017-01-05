@@ -4,19 +4,14 @@ language:
 
 jdk:
   - oraclejdk8
+  - oraclejdk7
   - openjdk7
-
-before_install:
-  - cd test
-  - cd java
-  - cd test
-  - cd java
-  
+ 
 services:
     - mysql
 
 script:
-  - ant VerificacionTest
+  - mvn test -f ./source/pom.xml
 
 sudo:
     - false
