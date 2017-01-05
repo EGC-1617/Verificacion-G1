@@ -1,13 +1,22 @@
-languaje: java
+language:
+    - java
 
-services: 
-	- mysql
-	
-script: 
-	- mvn test -B
-	
+
+jdk:
+  - oraclejdk8
+  - openjdk7
+
+before_install:
+  - cd java
+  
+services:
+    - mysql
+
+script:
+  - ant test
+
 sudo:
-	- false
+    - false
 
 notifications:
-	- email: false  # Desactivamos las notificaciones por email para evitar spam
+    - email: false  # Desactivamos las notificaciones por email para evitar spam
