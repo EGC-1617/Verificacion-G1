@@ -16,8 +16,7 @@ script:
   
 deploy:
     provider: releases
-    api_key:
-        secure: 1b4dbc53ea4688a352b81b771819d0cb377bedba 
+    api_key: 1b4dbc53ea4688a352b81b771819d0cb377bedba 
     file:
         - /home/travis/build/EGC-1617/Verificacion-G1/target/Verificacion1.jar
 
