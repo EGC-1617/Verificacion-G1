@@ -19,7 +19,7 @@ deploy:
     api_key:
         secure: 1b4dbc53ea4688a352b81b771819d0cb377bedba 
     file:
-        - target/Verificacion1.jar
+        - /home/travis/build/EGC-1617/Verificacion-G1/target/Verificacion1.jar
 
     skip_cleanup: true
     on:
