@@ -14,17 +14,6 @@ script:
   - mvn test -f pom.xml
   - mvn clean compile assembly:single
   
-deploy:
-    provider: releases
-    api_key: 1b4dbc53ea4688a352b81b771819d0cb377bedba 
-    file:
-        - /home/travis/build/EGC-1617/Verificacion-G1/target/Verificacion1.jar
-
-    skip_cleanup: true
-    on:
-        repo: EGC-1617/Verificacion-G1
-        tags: false
-        branch: master
 
 sudo:
     - false
