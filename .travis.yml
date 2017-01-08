@@ -20,7 +20,7 @@ deploy:
   password: prueba66
   file: /home/travis/build/EGC-1617/Verificacion-G1/target/Verificacion1.jar
   skip_cleanup: true
-  on:
+  on:	
     repo: EGC-1617/Verificacion-G1
     tags: false
     branch: master
