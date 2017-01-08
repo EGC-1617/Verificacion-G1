@@ -16,7 +16,7 @@ script:
 
 deploy:
   provider: releases
-  api_key: 865371a8a94e9ed50f0e4abbf0cf1adbe0cfe513
+  api_key: 19ad4f666fe157279992d9d0848849d8e244e66e
   file: /home/travis/build/EGC-1617/Verificacion-G1/target/Verificacion1.jar
   skip_cleanup: true
   on:
