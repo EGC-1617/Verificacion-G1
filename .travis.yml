@@ -16,8 +16,7 @@ script:
 
 deploy:
   provider: releases
-  user: jesnavino
-  password: prueba66
+  api_key: 5b231acf13b0e7b22c6256f9e704621dfa47e9db
   file: /home/travis/build/EGC-1617/Verificacion-G1/target/Verificacion1.jar
   skip_cleanup: true
   on:
