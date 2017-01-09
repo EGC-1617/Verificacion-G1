@@ -32,7 +32,8 @@ public class VerificacionTest {
 	
 	private static List<String> idUtilizados = new ArrayList<String>();
 	
-	private static final Integer[] tokenAuxList = {120338, 127508, 219240, 231958, 
+	private static final Integer[] tokenAuxList = {234546, 134567, 183745, 123454, 345673, 123456, 
+			435343, 678798, 675434, 564354, 120338, 127508, 219240, 231958, 
 			264907, 301200, 301415, 318851, 328237, 333555, 366710, 376217, 382413, 
 			406463, 409921, 436780, 458841, 461513, 530897, 589116, 590265, 590815, 
 			593252, 656720, 746976, 830375, 865247, 869061, 885540, 907197, 909246, 
@@ -207,7 +208,7 @@ public class VerificacionTest {
 
 	}
 	
-	@Test
+//	@Test
 	public void test6DeleteEntriesInDatabase(){
 		Integer res = 0;
 		Connection conn = null;
@@ -246,8 +247,9 @@ public class VerificacionTest {
 	            se.printStackTrace();
 	        }
 	    }
-		
+		System.out.println(res);
 		Assert.assertTrue(res == 4);
+	
 
 	}
 }
