@@ -21,7 +21,7 @@ deploy:
     skip_cleanup: true
     on:
         repo: EGC-1617/Verificacion-G1
-	tags: false
+        tags: false
         overwrite: true
  
 sudo:
