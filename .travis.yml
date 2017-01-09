@@ -12,6 +12,10 @@ script:
   - mvn test -f pom.xml
   - mvn clean compile assembly:single
 
+before_deploy:
+  - git config --global user.email "jesnavino@alum.us.es"
+  - git config --global user.name "jesnavino"
+
 deploy:
     provider: releases
     api_key:
