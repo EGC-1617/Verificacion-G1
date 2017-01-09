@@ -1,7 +1,5 @@
 package test.java;
 
-
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -10,11 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
-import javax.crypto.BadPaddingException;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -116,6 +111,7 @@ public class VerificacionTest {
 		token = 123456789;
 		
 		res = auth.postKey(votationId, token);
+		System.out.println(res);
 				
 		
 	}
@@ -162,7 +158,7 @@ public class VerificacionTest {
 		String desencriptado;
 		System.out.println(encriptado.toString());
 		aux=encriptado.toString();
-
+		System.out.println(aux);
 		desencriptado = auth.decrypt(votationId, encriptado, token2);
 		System.out.println(desencriptado);
 		Assert.assertTrue(encrypText.equals(desencriptado));
@@ -193,6 +189,7 @@ public class VerificacionTest {
 		Integer token3 = 111111111;
 		
 		desencriptado = auth.decrypt(votationId, encriptado, token3);
+		System.out.println(desencriptado);
 		
 		
 	}
@@ -221,6 +218,7 @@ public class VerificacionTest {
 		String desencriptado;
 		
 		desencriptado = auth.decrypt(votationId, encriptado, token2);
+		System.out.println(desencriptado);
 		
 
 	}

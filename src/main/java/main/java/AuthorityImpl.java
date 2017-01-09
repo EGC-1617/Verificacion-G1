@@ -1,23 +1,15 @@
 package main.java;
 
-
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.SimpleTimeZone;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
+
 
 public class AuthorityImpl implements Authority{
 	
@@ -119,6 +111,7 @@ public class AuthorityImpl implements Authority{
 		if(Token.checkTokenDb(new Integer(idVote), token)){
 			
 			secretKey = getPrivateKey(idVote, token);
+			System.out.println(secretKey);
 			
 			publicKey = getPublicKey(idVote, token);
 			byte[] keyDecoded2 = Base64.decodeBase64(publicKey.getBytes());
