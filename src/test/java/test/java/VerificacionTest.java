@@ -120,6 +120,23 @@ public class VerificacionTest {
 		
 	}
 	
+	@Test(expected = NumberFormatException.class)
+	public void test3PostKey3(){
+		
+		boolean res;
+		System.out.println("THe maximum bitLength of the BigInteger is 31");
+		String votationId = (new BigInteger(32, new SecureRandom())).toString();
+		
+		Integer token = calculateToken(new Integer(votationId));
+		
+		res = auth.postKey(votationId, token);
+		
+		idUtilizados.add(votationId);
+		
+		Assert.assertTrue(res == true);		
+		
+	}
+	
 	@Test
 	public void test3EncryptDecryptTest1() throws Exception{
 		String votationId;
@@ -208,7 +225,7 @@ public class VerificacionTest {
 
 	}
 	
-//	@Test
+	@Test
 	public void test6DeleteEntriesInDatabase(){
 		Integer res = 0;
 		Connection conn = null;
