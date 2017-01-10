@@ -12,10 +12,6 @@ script:
   - mvn test -f pom.xml
   - mvn clean compile assembly:single
 
-before_deploy:
-  - git config --global user.email "jesnavino@alum.us.es"
-  - git config --global user.name "jesnavino"
- 
 deploy:
     provider: releases
     api_key:
@@ -25,7 +21,7 @@ deploy:
     on:
         repo: EGC-1617/Verificacion-G1
         all_branches: true
-        tags: false
+        tags: true
         overwrite: true
  
 sudo:
