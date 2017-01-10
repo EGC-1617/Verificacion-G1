@@ -133,16 +133,44 @@ public class VerificacionTest {
 		
 	}
 	
-	@Test
+	@Test(expected = VerificationException.class)
 	public void test3EncryptDecryptTest1() throws Exception{
 		String votationId;
 		String encrypText;
-		String aux;
 		Integer token2;
 		String encriptado;
 		
 		votationId = (new BigInteger(25, new SecureRandom())).toString();
-		token2 = calculateToken(new Integer(votationId));		
+		token2 = calculateToken(new Integer(votationId));;		
+		
+		idUtilizados.add(votationId);
+		
+		auth.postKey(votationId, token2);
+		
+		encrypText = "prueba prueba";
+		
+	
+		encriptado = auth.encrypt(votationId, encrypText, token2);
+		System.out.println("Encriptado:" + encriptado.toString());
+		
+		
+		String desencriptado;
+		
+		desencriptado = auth.decrypt(votationId, encriptado, token2);
+		System.out.println("Desencriptado" + desencriptado);
+		Assert.assertTrue(encrypText.equals(desencriptado));
+		System.out.println("El token no coincicide, test3EscryptDecryptTest1");
+	}
+	
+	
+	@Test
+	public void test3EncryptDecryptTest2() throws Exception{
+		String encrypText;
+		String aux;
+		String encriptado;
+		
+		String votationId = (new BigInteger(25, new SecureRandom())).toString();
+		Integer token2 = calculateToken(new Integer(votationId));		
 		
 		idUtilizados.add(votationId);
 		
