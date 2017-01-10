@@ -193,6 +193,9 @@ public class VerificacionTest {
 		Assert.assertTrue(encrypText.equals(desencriptado));
 	}
 	
+	
+	
+	
 	@Test(expected = VerificationException.class)
 	public void test4EncryptDecryptTest2() throws Exception{
 		String votationId;
@@ -302,4 +305,29 @@ public class VerificacionTest {
 	
 
 	}
+	
+	
+	@Test
+	public void pruebaDefensa() throws Exception{
+		
+		String votationId = (new BigInteger(25, new SecureRandom())).toString();
+		Integer token2 = calculateToken(new Integer(votationId));	
+		//Guardamos la id de votacion en los id utilizados
+		idUtilizados.add(votationId);
+		//Obtiene la clave publica y privada y la guarda en la base de datos
+		auth.postKey(votationId, token2);
+		
+		AuthorityImpl authority = new AuthorityImpl();
+		
+		
+		//Llamamos a la base de datos pasando el token para comprobar que han sido guardadas
+		String clavePublica = authority.getPublicKey(votationId, token2);
+		String clavePrivada = authority.getPrivateKey(votationId, token2);
+		
+		//Comprobamos que no sea null
+		Assert.assertNotNull("La clave publica es null", clavePublica);
+		Assert.assertNotNull("La clave privada es null", clavePrivada);
+		
+	}
+	
 }
