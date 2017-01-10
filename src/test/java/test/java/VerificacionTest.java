@@ -120,8 +120,8 @@ public class VerificacionTest {
 	public void test3PostKey3(){
 		
 		boolean res;
-		System.out.println("THe maximum bitLength of the BigInteger is 31");
-		String votationId = (new BigInteger(32, new SecureRandom())).toString();
+		
+		String votationId =null;
 		
 		Integer token = calculateToken(new Integer(votationId));
 		
@@ -129,7 +129,7 @@ public class VerificacionTest {
 		
 		idUtilizados.add(votationId);
 		
-		Assert.assertTrue(res == true);		
+		Assert.assertTrue(res == false);		
 		
 	}
 	
