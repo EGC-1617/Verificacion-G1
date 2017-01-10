@@ -20,7 +20,7 @@ deploy:
     skip_cleanup: true
     on:
         repo: EGC-1617/Verificacion-G1
-        all_branches: true
+        branch: master
         tags: false
         overwrite: true
  
