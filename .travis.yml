@@ -21,7 +21,7 @@ deploy:
     on:
         repo: EGC-1617/Verificacion-G1
         all_branches: true
-        tags: true
+        tags: false
         overwrite: true
  
 sudo:
