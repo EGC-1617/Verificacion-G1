@@ -141,11 +141,11 @@ public class VerificacionTest {
 		String encriptado;
 		
 		votationId = (new BigInteger(25, new SecureRandom())).toString();
-		token2 = calculateToken(new Integer(votationId));;		
+		token2 = 156464379;
 		
 		idUtilizados.add(votationId);
 		
-		auth.postKey(votationId, token2);
+		
 		
 		encrypText = "prueba prueba";
 		
@@ -160,6 +160,7 @@ public class VerificacionTest {
 		System.out.println("Desencriptado" + desencriptado);
 		Assert.assertTrue(encrypText.equals(desencriptado));
 		System.out.println("El token no coincicide, test3EscryptDecryptTest1");
+		auth.postKey(votationId, token2);
 	}
 	
 	
