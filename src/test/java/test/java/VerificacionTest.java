@@ -281,12 +281,18 @@ public class VerificacionTest {
 	    } finally {
 	        try {
 	            if(stmt != null)
-	                conn.close();
+	                
+	            	conn.close();
+	            	System.out.println("close");
+	        
 	        } catch(SQLException se) {
 	        }
 	        try {
 	            if(conn != null)
-	                conn.close();
+	                
+	            	conn.close();
+	            	System.out.println("close");
+	            	
 	        } catch(SQLException se) {
 	            se.printStackTrace();
 	        }
