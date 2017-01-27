@@ -61,4 +61,9 @@ public class VerificacionTestLocal {
 	
 	}  
 	
+	private static void checkId(Integer votationId) {
+		assert votationId <= 999999998;
+		
+	}
+	
 }
