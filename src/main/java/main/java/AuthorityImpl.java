@@ -63,6 +63,46 @@ public class AuthorityImpl implements Authority{
 		
 		return res;
 	}
+	
+		public boolean postKeyLocal(String id, Integer token) {
+		boolean res;
+		BigInteger secretKey;
+		String publicKey;
+		String encodedPublicKey;
+		res = false;
+		
+		if(Token.checkToken(new Integer(id), token)){
+			try{
+				
+				Token.createToken(new Integer(id));				
+				
+				CryptoEngine cryptoEngine = new CryptoEngine(id);
+				cryptoEngine.generateKeyPair();
+		
+				secretKey = cryptoEngine.getKeyPair().getSecretKey();
+				publicKey = cryptoEngine.getKeyPair().getPublicKey().getX()+"++++"+cryptoEngine.getKeyPair().getPublicKey().getY();
+				
+				
+				//Cambiar metodo de autenticacion
+				encodedPublicKey = new String(Base64.encodeBase64(publicKey.getBytes()));
+				
+				
+				//Usar base de datos local
+				RemoteDataBaseManager rdbm=new RemoteDataBaseManager();
+
+				if (rdbm.postKeys(id, encodedPublicKey, secretKey.toString())){
+					res = true;
+				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else{
+			throw new VerificationException("El token no coincide");
+		}
+		
+		return res;
+	}
 
 	@Override
 	public String getPublicKey(String id, Integer token) {

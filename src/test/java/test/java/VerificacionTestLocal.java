@@ -66,4 +66,27 @@ public class VerificacionTestLocal {
 		
 	}
 	
+	/*
+	 *Cuando hacemos uso del método postKey obtenemos las claves publica y privada según el
+	 *id de votación pasado.
+	 */
+	
+	@Test
+	public void testPostKeyLocal(){
+		String votationId;
+		Integer token;
+		boolean res;
+		
+		votationId = (new BigInteger(25, new SecureRandom())).toString();
+		
+		token = calculateToken(new Integer(votationId));
+		
+		res = auth.postKeyLocal(votationId, token);
+		
+		idUtilizados.add(votationId);
+		
+		Assert.assertTrue(res == true);		
+		
+	}
+	
 }
