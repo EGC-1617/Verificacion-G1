@@ -83,7 +83,7 @@ public class VerificacionTest {
 	
 	
 	@Test
-	public void test1PostKey1(){
+	public void test1PostKey1Remote(){
 		String votationId;
 		Integer token;
 		boolean res;
@@ -101,7 +101,7 @@ public class VerificacionTest {
 	}
 	
 	@Test(expected = VerificationException.class)
-	public void test2PostKey2(){
+	public void test2PostKey2Remote(){
 		String votationId;
 		Integer token;
 		boolean res;
@@ -117,7 +117,7 @@ public class VerificacionTest {
 	}
 	
 	@Test(expected = NumberFormatException.class)
-	public void test3PostKey3(){
+	public void test3PostKey3Remote(){
 		
 		boolean res;
 		
@@ -134,7 +134,7 @@ public class VerificacionTest {
 	}
 	
 	@Test(expected = VerificationException.class)
-	public void test3EncryptDecryptTest1() throws Exception{
+	public void test3EncryptDecryptTest1Remote() throws Exception{
 		String votationId;
 		String encrypText;
 		Integer token2;
@@ -165,7 +165,7 @@ public class VerificacionTest {
 	
 	
 	@Test
-	public void test3EncryptDecryptTest2() throws Exception{
+	public void test3EncryptDecryptTest2Remote() throws Exception{
 		String encrypText;
 		String aux;
 		String encriptado;
@@ -197,7 +197,7 @@ public class VerificacionTest {
 	
 	
 	@Test(expected = VerificationException.class)
-	public void test4EncryptDecryptTest2() throws Exception{
+	public void test4EncryptDecryptTest2Remote() throws Exception{
 		String votationId;
 		String encrypText;
 		Integer token2;
@@ -228,7 +228,7 @@ public class VerificacionTest {
 	
 	//@Test(expected = ArrayIndexOutOfBoundsException.class)
 	@Test
-	public void test5EncryptDecryptTest3() throws Exception{
+	public void test5EncryptDecryptTest3Remote() throws Exception{
 		String votationId;
 		String encrypText;
 		Integer token2;
@@ -256,7 +256,7 @@ public class VerificacionTest {
 	}
 	
 	@Test
-	public void test6DeleteEntriesInDatabase(){
+	public void test6DeleteEntriesInDatabaseRemote(){
 		Integer res = 0;
 		Connection conn = null;
 		Statement stmt = null;
@@ -308,7 +308,7 @@ public class VerificacionTest {
 	
 	
 	@Test
-	public void pruebaDefensa() throws Exception{
+	public void pruebaDefensaRemote() throws Exception{
 		
 		String votationId = (new BigInteger(25, new SecureRandom())).toString();
 		Integer token2 = calculateToken(new Integer(votationId));	

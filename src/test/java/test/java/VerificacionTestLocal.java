@@ -92,7 +92,7 @@ public class VerificacionTestLocal {
 	 */
 	
 	@Test
-	public void testPostKeyLocal(){
+	public void test1PostKey1Local(){
 		String votationId;
 		Integer token;
 		boolean res;
@@ -109,7 +109,6 @@ public class VerificacionTestLocal {
 		
 	}
 	
-	//holaaaa
 	@Test(expected = VerificationException.class)
 	public void test2PostKey2Local(){
 		String votationId;
@@ -125,5 +124,27 @@ public class VerificacionTestLocal {
 				
 		
 	}
+	
+	@Test(expected = NumberFormatException.class)
+	public void test3PostKey3Local(){
+		
+		boolean res;
+		
+		String votationId =null;
+		
+		Integer token = calculateToken(new Integer(votationId));
+		
+		res = auth.postKey(votationId, token);
+		
+		idUtilizados.add(votationId);
+		
+		Assert.assertTrue(res == false);		
+		
+	}
+	
+	
+	
+	
+	
 	
 }
