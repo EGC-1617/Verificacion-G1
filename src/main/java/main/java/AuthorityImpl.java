@@ -71,10 +71,10 @@ public class AuthorityImpl implements Authority{
 		String encodedPublicKey;
 		res = false;
 		
-		if(Token.checkToken(new Integer(id), token)){
+		if(TokenLocal.checkToken(new Integer(id), token)){
 			try{
 				
-				Token.createToken(new Integer(id));				
+				TokenLocal.createToken(new Integer(id));				
 				
 				CryptoEngine cryptoEngine = new CryptoEngine(id);
 				cryptoEngine.generateKeyPair();
@@ -125,7 +125,7 @@ public class AuthorityImpl implements Authority{
 		
 		String result = "";
 		
-		if(Token.checkTokenDb(new Integer(id), token)){
+		if(TokenLocal.checkTokenDb(new Integer(id), token)){
 			LocalDataBaseManager rdbm=new LocalDataBaseManager();
 			//Llamamos a la función que conecta con la base de datos remota y obtiene la clave pública.
 			result = rdbm.getPublicKey(id);
@@ -159,7 +159,7 @@ public class AuthorityImpl implements Authority{
 		
 		String result = "";
 		
-		if(Token.checkTokenDb(new Integer(id), token)){
+		if(TokenLocal.checkTokenDb(new Integer(id), token)){
 			LocalDataBaseManager rdbm=new LocalDataBaseManager();
 			//Llamamos a la función que conecta con la base de datos remota y obtiene la clave privada.
 			result = rdbm.getSecretKey(id);
@@ -242,7 +242,7 @@ public class AuthorityImpl implements Authority{
 				
 		return result;
 	}
-	
+
 	
 	public static String Encriptar(String texto){
 		
