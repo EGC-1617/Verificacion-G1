@@ -61,6 +61,26 @@ public class VerificacionTestLocal {
 	
 	}  
 	
+	
+	private static Connection getDatabaseConnection(){
+		String USER = "root";
+	    String PASS = "admin";  
+	    String DB_URL = "jdbc:mysql://127.0.0.1:3306/verificacion";
+	    
+	    Connection conn = null;
+	    
+	    try{
+	    	Class.forName("com.mysql.jdbc.Driver").newInstance();
+	    	conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	    }catch (Exception e){
+	    	e.printStackTrace();
+	    }
+	    
+	    return conn;	    
+	    
+	}
+	
+	
 	private static void checkId(Integer votationId) {
 		assert votationId <= 999999998;
 		

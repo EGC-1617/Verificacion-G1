@@ -88,7 +88,7 @@ public class AuthorityImpl implements Authority{
 				
 				
 				//Usar base de datos local
-				RemoteDataBaseManager rdbm=new RemoteDataBaseManager();
+				LocalDataBaseManager rdbm=new LocalDataBaseManager();
 
 				if (rdbm.postKeys(id, encodedPublicKey, secretKey.toString())){
 					res = true;
