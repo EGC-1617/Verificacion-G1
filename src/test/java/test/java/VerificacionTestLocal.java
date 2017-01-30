@@ -110,5 +110,20 @@ public class VerificacionTestLocal {
 	}
 	
 	//holaaaa
+	@Test(expected = VerificationException.class)
+	public void test2PostKey2Local(){
+		String votationId;
+		Integer token;
+		boolean res;
+		
+		votationId = (new BigInteger(25, new SecureRandom())).toString();
+		
+		token = 123456789;
+		
+		res = auth.postKey(votationId, token);
+		System.out.println(res);
+				
+		
+	}
 	
 }
