@@ -89,7 +89,6 @@
         	<configuration>
           	<includes>
             <include>VerificacionTest.java</include>
-            <include>VerificacionTestLocal.java</include>
           </includes>
         </configuration>
       </plugin>
