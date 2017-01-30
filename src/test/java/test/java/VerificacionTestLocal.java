@@ -144,5 +144,34 @@ public class VerificacionTestLocal {
 		
 		Assert.assertTrue(res == false);		
 		
-	}	
+	}
+	
+	@Test(expected = VerificationException.class)
+	public void test4EncryptDecryptTest1Local() throws Exception{
+		System.out.println("----------------PRUEBA TEST 4 ENCRYPT DECRYPT KEY LOCAL 1--------------------\n");
+		
+		String votationId;
+		String encrypText;
+		Integer token2;
+		String encriptado;
+		
+		votationId = (new BigInteger(25, new SecureRandom())).toString();
+		token2 = 156464379;
+		
+		idUtilizados.add(votationId);
+		
+		encrypText = "prueba prueba";
+		
+		encriptado = auth.encrypt(votationId, encrypText, token2);
+		System.out.println("Encriptado:" + encriptado.toString());
+		
+		
+		String desencriptado;
+		
+		desencriptado = auth.decrypt(votationId, encriptado, token2);
+		System.out.println("Desencriptado" + desencriptado);
+		Assert.assertTrue(encrypText.equals(desencriptado));
+		System.out.println("El token no coincicide, test4EncryptDecryptTest1Local");
+		auth.postKey(votationId, token2);
+	}
 }

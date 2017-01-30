@@ -134,7 +134,7 @@ public class VerificacionTest {
 	}
 	
 	@Test(expected = VerificationException.class)
-	public void test3EncryptDecryptTest1Remote() throws Exception{
+	public void test4EncryptDecryptTest1Remote() throws Exception{
 		String votationId;
 		String encrypText;
 		Integer token2;
@@ -159,13 +159,13 @@ public class VerificacionTest {
 		desencriptado = auth.decrypt(votationId, encriptado, token2);
 		System.out.println("Desencriptado" + desencriptado);
 		Assert.assertTrue(encrypText.equals(desencriptado));
-		System.out.println("El token no coincicide, test3EscryptDecryptTest1");
+		System.out.println("El token no coincicide, test3EscryptDecryptTest1Remote");
 		auth.postKey(votationId, token2);
 	}
 	
 	
 	@Test
-	public void test3EncryptDecryptTest2Remote() throws Exception{
+	public void test5EncryptDecryptTest2Remote() throws Exception{
 		String encrypText;
 		String aux;
 		String encriptado;
@@ -197,7 +197,7 @@ public class VerificacionTest {
 	
 	
 	@Test(expected = VerificationException.class)
-	public void test4EncryptDecryptTest2Remote() throws Exception{
+	public void test6EncryptDecryptTest2Remote() throws Exception{
 		String votationId;
 		String encrypText;
 		Integer token2;
@@ -228,7 +228,7 @@ public class VerificacionTest {
 	
 	//@Test(expected = ArrayIndexOutOfBoundsException.class)
 	@Test
-	public void test5EncryptDecryptTest3Remote() throws Exception{
+	public void test7EncryptDecryptTest3Remote() throws Exception{
 		String votationId;
 		String encrypText;
 		Integer token2;
@@ -256,7 +256,7 @@ public class VerificacionTest {
 	}
 	
 	@Test
-	public void test6DeleteEntriesInDatabaseRemote(){
+	public void test8DeleteEntriesInDatabaseRemote(){
 		Integer res = 0;
 		Connection conn = null;
 		Statement stmt = null;
