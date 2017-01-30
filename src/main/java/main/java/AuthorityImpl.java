@@ -243,6 +243,31 @@ public class AuthorityImpl implements Authority{
 		return result;
 	}
 
+	public String encryptLocal(String idVote, String textToEncypt, Integer token) {
+		String result;
+		String publicKeyBD = "";
+		String aux;
+		
+		if(TokenLocal.checkTokenDb(new Integer(idVote), token)){
+			
+			//Obtengo la clave pública con getKey y separa esto en x e y (que es la mitad y hacer un new PointGMP). Acordarse de que  
+			//en la base de datos se guarda en base64
+			publicKeyBD = getPublicKeyLocal(idVote, token);
+
+			byte[] keyDecoded = Base64.decodeBase64(publicKeyBD.getBytes());
+			publicKeyBD = new String(keyDecoded);
+				
+			aux=Encriptar(textToEncypt);
+			
+			result=aux;
+
+		}else{
+			throw new VerificationException("El token no coincide en encriptar");
+		}
+				
+		return result;
+	}
+
 	
 	public static String Encriptar(String texto){
 		
@@ -267,6 +292,8 @@ public class AuthorityImpl implements Authority{
 		}
 	return base64EncryptedString;
 	}
+	
+	
 	
 	public static String Desencriptar(String textoEncriptado) throws Exception{
 		
