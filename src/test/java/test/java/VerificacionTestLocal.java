@@ -91,8 +91,10 @@ public class VerificacionTestLocal {
 	 *id de votación pasado.
 	 */
 	
+	
 	@Test
 	public void test1PostKey1Local(){
+		System.out.println("----------------PRUEBA TEST 1 POST KEY LOCAL 1--------------------\n");
 		String votationId;
 		Integer token;
 		boolean res;
@@ -111,6 +113,7 @@ public class VerificacionTestLocal {
 	
 	@Test(expected = VerificationException.class)
 	public void test2PostKey2Local(){
+		System.out.println("----------------PRUEBA TEST 2 POST KEY LOCAL 2--------------------\n");
 		String votationId;
 		Integer token;
 		boolean res;
@@ -127,6 +130,7 @@ public class VerificacionTestLocal {
 	
 	@Test(expected = NumberFormatException.class)
 	public void test3PostKey3Local(){
+		System.out.println("----------------PRUEBA TEST 3 POST KEY LOCAL 3--------------------\n");
 		
 		boolean res;
 		
@@ -140,11 +144,5 @@ public class VerificacionTestLocal {
 		
 		Assert.assertTrue(res == false);		
 		
-	}
-	
-	
-	
-	
-	
-	
+	}	
 }
