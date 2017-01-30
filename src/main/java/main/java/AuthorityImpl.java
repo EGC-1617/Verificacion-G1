@@ -199,6 +199,32 @@ public class AuthorityImpl implements Authority{
 				
 		return result;
 	}
+	
+	@Override
+	public String decryptLocal(String idVote, String cipherText, Integer token) throws Exception {
+		String result = "";
+	
+		String secretKey;
+		String publicKey;
+
+		
+		if(TokenLocal.checkTokenDb(new Integer(idVote), token)){
+			
+			secretKey = getPrivateKeyLocal(idVote, token);
+			System.out.println(secretKey);
+			
+			publicKey = getPublicKeyLocal(idVote, token);
+			byte[] keyDecoded2 = Base64.decodeBase64(publicKey.getBytes());
+			publicKey = new String(keyDecoded2);
+			
+			result= Desencriptar(cipherText);
+
+		}else{
+			throw new VerificationException("El token no coincide en desencriptar Local");
+		}
+				
+		return result;
+	}
 
 	/**
 	 * Esta función corta un voto en claro en partes de longitud 31 para que el método de cifrar
@@ -262,7 +288,7 @@ public class AuthorityImpl implements Authority{
 			result=aux;
 
 		}else{
-			throw new VerificationException("El token no coincide en encriptar");
+			throw new VerificationException("El token no coincide en encriptar Local");
 		}
 				
 		return result;

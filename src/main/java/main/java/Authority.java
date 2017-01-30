@@ -27,11 +27,14 @@ public interface Authority {
 		//Encripta el texto con la clave pública de la votación cuya id se pasa como parámetro.
 		String encrypt(String idVote,String textToEncypt, Integer token);
 		
-		//Encripta el texto con la clave pública de la votación cuya id se pasa como parámetro.
+		//Encripta el texto con la clave pública de la votación cuya id se pasa como parámetro en Local.
 		String encryptLocal(String idVote,String textToEncypt, Integer token);
 		
 		//Desencripta el texto con la clave privada de la votación cuya id se pasa como parámetro.	
 		String decrypt(String idVote,String cipherText, Integer token) throws BadPaddingException, UnsupportedEncodingException, Exception;
+		
+		//Desencripta el texto con la clave privada de la votación cuya id se pasa como parámetro en Local.	
+		String decryptLocal(String idVote,String cipherText, Integer token) throws BadPaddingException, UnsupportedEncodingException, Exception;
 		
 		
 }
