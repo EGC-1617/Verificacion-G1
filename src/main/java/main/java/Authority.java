@@ -21,6 +21,9 @@ public interface Authority {
 		//Recibe la id de la votación y devuelve su clave privada para poder descifrar.
 		String getPrivateKey(String id, Integer token);
 		
+		//Recibe la id de la votación y devuelve su clave privada para poder descifrar en Local.
+		String getPrivateKeyLocal(String id, Integer token);
+		
 		//Encripta el texto con la clave pública de la votación cuya id se pasa como parámetro.
 		String encrypt(String idVote,String textToEncypt, Integer token);
 		

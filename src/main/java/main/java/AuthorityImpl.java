@@ -121,7 +121,7 @@ public class AuthorityImpl implements Authority{
 		
 	}
 	
-public String getPublicKeyLocal(String id, Integer token) {
+	public String getPublicKeyLocal(String id, Integer token) {
 		
 		String result = "";
 		
@@ -154,6 +154,21 @@ public String getPublicKeyLocal(String id, Integer token) {
 	}
 
 
+	@Override
+	public String getPrivateKeyLocal(String id, Integer token) {
+		
+		String result = "";
+		
+		if(Token.checkTokenDb(new Integer(id), token)){
+			LocalDataBaseManager rdbm=new LocalDataBaseManager();
+			//Llamamos a la función que conecta con la base de datos remota y obtiene la clave privada.
+			result = rdbm.getSecretKey(id);
+		}else{
+			throw new VerificationException("El token no coincide en getPrivateKey Local");
+		}		
+		
+		return result;
+	}
 
 
 	@Override
