@@ -21,7 +21,7 @@ public class CryptoRSA {
 	 * @return Par de claves pública y privada
 	 * @throws NoSuchAlgorithmException
 	 */
-	public KeyPair generateKeyPair(String vote) throws NoSuchAlgorithmException {
+	public static KeyPair generateKeyPair(String vote) throws NoSuchAlgorithmException {
 		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 		KeyPair keyPair = keyPairGenerator.generateKeyPair();
 

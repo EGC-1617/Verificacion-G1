@@ -1,6 +1,7 @@
 package test.java;
 
 import java.math.BigInteger;
+import java.security.KeyPair;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -18,12 +20,14 @@ import org.junit.runners.MethodSorters;
 
 import main.java.Authority;
 import main.java.AuthorityImpl;
+import main.java.CryptoRSA;
 import main.java.VerificationException;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VerificacionTest {
 	
 	private static Authority auth = new AuthorityImpl();
+	private static CryptoRSA rsa;
 	
 	private static List<String> idUtilizados = new ArrayList<String>();
 	
@@ -304,6 +308,35 @@ public class VerificacionTest {
 		Assert.assertTrue(res == 5);
 	
 
+	}
+	
+	@Test
+	public void test9EncryptRSA() throws Exception{
+		KeyPair keypair;
+		String votationId;
+		String encrypText;
+		
+		votationId = (new BigInteger(25, new SecureRandom())).toString();
+		idUtilizados.add(votationId);
+		
+		keypair=CryptoRSA.generateKeyPair(votationId);
+		
+		encrypText = "";
+		
+	
+		String encriptado = CryptoRSA.encrypt(encrypText, keypair.getPublic());
+		byte[] aux= encriptado.getBytes();
+		byte[] primeraMitad=Arrays.copyOfRange(aux, 0, aux.length/2);
+		byte[] segundaMitad=Arrays.copyOfRange(aux, aux.length/2, aux.length);
+		String encriptado1 =primeraMitad.toString().concat(segundaMitad.toString());
+		//---------------------------------
+		//System.out.println(encriptado);
+		System.out.println(encriptado1);
+		//String desencriptado;
+
+		//desencriptado = CryptoRSA.decrypt(encriptado, keypair.getPrivate());
+		//System.out.println(desencriptado);
+		//Assert.assertTrue(encrypText.equals(desencriptado));
 	}
 	
 	
