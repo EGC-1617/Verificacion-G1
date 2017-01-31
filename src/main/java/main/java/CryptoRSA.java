@@ -15,10 +15,10 @@ public class CryptoRSA {
 	
 	
 	/**
-	 * Dado un voto, generamos su clave publica y privada
+	 * Dado un voto, generamos su clave pública y privada
 	 * 
-	 * @param vote
-	 * @return Par de claves publica y privada
+	 * @param vote : Voto sin encriptar
+	 * @return Par de claves pública y privada
 	 * @throws NoSuchAlgorithmException
 	 */
 	public KeyPair generateKeyPair(String vote) throws NoSuchAlgorithmException {
@@ -28,22 +28,28 @@ public class CryptoRSA {
 		return keyPair;
 	}
 	
-	
-	
 
-
-
+	/**
+	 * Método que dado un voto y una clave pública, encripta usando RSA
+	 * 
+	 * @param vote : Voto sin encriptar
+	 * @param key : Clave publica
+	 * @return Voto encriptado
+	 */
 	public static String encrypt (String vote, PublicKey key) {
 
 		String cipherVoteString = null;
 		byte[] cipherVote = null;
 
 		try {
+			// Obtener el tipo de encriptacion que vamos a realizar
 			rsa = Cipher.getInstance("RSA");
-			rsa.init(Cipher.ENCRYPT_MODE, key);
 			
+			// Encripta
+			rsa.init(Cipher.ENCRYPT_MODE, key);
 			cipherVote = rsa.doFinal(vote.getBytes());
 
+			// Convertimos a String el voto encriptado
 			cipherVoteString = new String(cipherVote);
 
 		} catch (Exception e) {
@@ -53,18 +59,28 @@ public class CryptoRSA {
 		return cipherVoteString;
 	}
 	
+	
+	/**
+	 * Método que dado un voto y una clave privada, desencripta usando RSA
+	 * 
+	 * @param cipherText : Voto encriptado
+	 * @param key : Clave privada
+	 * @return Voto desencriptado
+	 */
 	public static String decrypt (String cipherText, PrivateKey key) {
 
 		String vote = null;
 		byte[] dectyptedVote = null;
 
 		try {
-
+			// Obtener el tipo de encriptacion que vamos a realizar
 			rsa = Cipher.getInstance("RSA");
+			
+			// Desencripta
 			rsa.init(Cipher.DECRYPT_MODE, key);
-
 			dectyptedVote = rsa.doFinal(cipherText.getBytes());
 
+			// Convertimos a String el voto desencriptado
 			vote = new String(dectyptedVote);
 
 		} catch (Exception e) {
