@@ -267,4 +267,58 @@ public class VerificacionTestLocal {
 		desencriptado = auth.decrypt(votationId, encriptado, token2);
 		System.out.println(desencriptado);
 	}
+	
+	@Test
+	public void test8DeleteEntriesInDatabaseLocal(){
+		Integer res = 0;
+		Connection conn = null;
+		Statement stmt = null;
+	    
+		try {	
+		
+			for(String id: idUtilizados){
+				conn = getDatabaseConnection();
+				
+				stmt = conn.createStatement();
+
+				String sql = "DELETE FROM keysvotes " +
+		                "WHERE idvotation="+id;
+				
+				PreparedStatement preparedStatement = conn.prepareStatement(sql);
+		        int r = preparedStatement.executeUpdate();
+		        
+		        System.out.println(res);
+		        
+		        res = res + r;
+		        
+			}
+		} catch(SQLException se) {
+	        se.printStackTrace();
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if(stmt != null)
+	                
+	            	conn.close();
+	            	System.out.println("close");
+	        
+	        } catch(SQLException se) {
+	        }
+	        try {
+	            if(conn != null)
+	                
+	            	conn.close();
+	            	System.out.println("close");
+	            	
+	        } catch(SQLException se) {
+	            se.printStackTrace();
+	        }
+	    }
+		System.out.println(res);
+		Assert.assertTrue(res == 1);
+	
+
+	}
+	
 }
