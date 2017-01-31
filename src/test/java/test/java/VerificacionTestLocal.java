@@ -207,4 +207,37 @@ public class VerificacionTestLocal {
 		Assert.assertTrue(encrypText.equals(desencriptado));
 	}
 	
+	@Test(expected = VerificationException.class)
+	public void test6EncryptDecryptTest2Local() throws Exception{
+		
+		System.out.println("----------------PRUEBA TEST 6 ENCRYPT DECRYPT KEY LOCAL 2--------------------\n");
+		
+		String votationId;
+		String encrypText;
+		Integer token2;
+		String encriptado;
+		
+		votationId = (new BigInteger(25, new SecureRandom())).toString();
+		token2 = calculateToken(new Integer(votationId));		
+		
+		idUtilizados.add(votationId);
+		
+		auth.postKey(votationId, token2);
+		
+		encrypText = "prueba prueba";
+		
+		encriptado = auth.encrypt(votationId, encrypText, token2);
+		
+		//---------------------------------
+		
+		String desencriptado;
+		
+		Integer token3 = 111111111;
+		
+		desencriptado = auth.decrypt(votationId, encriptado, token3);
+		System.out.println(desencriptado);
+		
+		
+	}
+	
 }
