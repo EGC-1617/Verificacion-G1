@@ -3,6 +3,7 @@ package main.java;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.PublicKey;
 
 import javax.crypto.Cipher;
@@ -50,6 +51,27 @@ public class CryptoRSA {
 		}
 
 		return cipherVoteString;
+	}
+	
+	public static String decrypt (String cipherText, PrivateKey key) {
+
+		String vote = null;
+		byte[] dectyptedVote = null;
+
+		try {
+
+			rsa = Cipher.getInstance("RSA");
+			rsa.init(Cipher.DECRYPT_MODE, key);
+
+			dectyptedVote = rsa.doFinal(cipherText.getBytes());
+
+			vote = new String(dectyptedVote);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return vote;
 	}
 
 
