@@ -28,4 +28,4 @@ sudo:
     - false
 
 notifications:
-    - email: false  # Desactivamos las notificaciones por email para evitar spam
+    - email: false  # Desactivamos las notificaciones por email para evitar recibir spam
