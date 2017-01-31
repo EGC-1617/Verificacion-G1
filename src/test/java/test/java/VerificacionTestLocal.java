@@ -240,4 +240,31 @@ public class VerificacionTestLocal {
 		
 	}
 	
+	@Test
+	public void test7EncryptDecryptTest3Local() throws Exception{
+		System.out.println("----------------PRUEBA TEST 7 ENCRYPT DECRYPT KEY LOCAL 3--------------------\n");
+		
+		String votationId;
+		String encrypText;
+		Integer token2;
+		String encriptado;
+		
+		votationId = (new BigInteger(25, new SecureRandom())).toString();
+		token2 = calculateToken(new Integer(votationId));		
+		
+		idUtilizados.add(votationId);
+		
+		auth.postKey(votationId, token2);
+		
+		encrypText = "";
+		
+		encriptado = auth.encrypt(votationId, encrypText, token2);
+		
+		//---------------------------------
+		
+		String desencriptado;
+		
+		desencriptado = auth.decrypt(votationId, encriptado, token2);
+		System.out.println(desencriptado);
+	}
 }
