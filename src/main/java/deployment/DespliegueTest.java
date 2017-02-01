@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import main.java.Authority;
 import main.java.AuthorityImpl;
+import java.awt.Button;
 
 public class DespliegueTest {
 
@@ -64,11 +65,6 @@ public class DespliegueTest {
 	 * 
 	 */
 	
-	private static void checkId(Integer votationId) {
-		assert votationId <= 999999998;
-		
-	}
-	
 	private static Integer calculateToken(Integer votationId){
 		
 		Integer token = 0;
@@ -90,6 +86,11 @@ public class DespliegueTest {
 		}
 		
 		return token*17;
+		
+	}
+	
+	private static void checkId(Integer votationId) {
+		assert votationId <= 999999998;
 		
 	}
 	
@@ -136,7 +137,7 @@ public class DespliegueTest {
 		datos.setBounds(218, 75, 500, 34);
 		frame1.getContentPane().add(datos);
 		
-		//<-----------------------------------MD5----------------------------------------->
+		//<-----------------------------------  MD5  ----------------------------------------->
 		
 		md5_encript = new JButton("Encriptar(MD5)");
 		md5_encript.setBounds(185, 133, 127, 23);
@@ -210,7 +211,7 @@ public class DespliegueTest {
 				  		frame3.getContentPane().add(datos);
 				  		
 				  		JTextArea textArea = new JTextArea();
-						textArea.setBounds(225, 81, 500, 34);
+						textArea.setBounds(240, 81, 500, 34);
 						textArea.setText(voto_md5_desencript);
 						frame3.getContentPane().add(textArea);
 		    	  
@@ -221,86 +222,6 @@ public class DespliegueTest {
 		
 		      }
 		});
-		
-	
-		/*
-		
-		//<-----------------------RSA---------------------------------->
-		
-		JButton rsa_encript = new JButton("Encriptar(RSA)");
-		rsa_encript.setBounds(139, 172, 127, 23);
-		frame1.getContentPane().add(rsa_encript);
-		md5_encript.addActionListener(new ActionListener(){
-
-			//ENCRIPTAR
-			
-		      public void actionPerformed(ActionEvent ae){
-		    	  
-		    	
-		    	  voto_rsa_encript = CryptoEngine.Encriptar(voto);
-		    	  frame2 = new JFrame();
-		    	  frame2.getContentPane().setLayout(null);
-		  		
-		    	  frame2.setSize(450, 263);
-		    	  frame2.setTitle("Despliegue");
-		    	  
-		    	  frame1.setVisible(false);
-		    	  frame2.setVisible(true);
-		    	  
-		    	JLabel datos = new JLabel("Voto encriptado: ");
-		  		datos.setBounds(107, 79, 128, 25);
-		  		frame2.getContentPane().add(datos);
-		  		
-		  		JTextArea textArea = new JTextArea();
-				textArea.setBounds(218, 81, 500, 34);
-				textArea.setText(voto_md5_encript);
-				frame2.getContentPane().add(textArea);
-				
-		  				
-		  		md5_desencript = new JButton("Desencriptar(MD5)");
-		  		md5_desencript.setBounds(139, 138, 175, 23);
-		  		frame2.getContentPane().add(md5_desencript);
-		  		md5_desencript.addActionListener(new ActionListener(){
-
-		  			//DESENCRIPTAR
-					
-				      public void actionPerformed(ActionEvent ae){
-				    	  
-				    	
-				    	  try {
-							voto_md5_desencript = AuthorityImpl.Desencriptar(voto_md5_encript);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-				    	  
-				    	  frame3 = new JFrame();
-				    	  frame3.getContentPane().setLayout(null);
-				  		
-				    	  frame3.setSize(450, 263);
-				    	  frame3.setTitle("Despliegue");
-				    	  
-				    	  frame2.setVisible(false);
-				    	  frame3.setVisible(true);
-				    	  
-				    	JLabel datos = new JLabel("Voto desencriptado: ");
-				  		datos.setBounds(107, 79, 128, 25);
-				  		frame3.getContentPane().add(datos);
-				  		
-				  		JTextArea textArea = new JTextArea();
-						textArea.setBounds(225, 81, 500, 34);
-						textArea.setText(voto_md5_desencript);
-						frame3.getContentPane().add(textArea);
-		    	  
-
-		      }
-
-		});
-		
-		      }
-		});
-		
-		*/
 
 		} 
 	}
