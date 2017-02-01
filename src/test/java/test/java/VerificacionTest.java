@@ -306,7 +306,7 @@ public class VerificacionTest {
 	        }
 	    }
 		System.out.println(res);
-		Assert.assertTrue(res == 5);
+		Assert.assertTrue(res == 6);
 	
 
 	}
