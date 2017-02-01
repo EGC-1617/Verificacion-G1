@@ -349,6 +349,45 @@ public class VerificacionTest {
 	}
 	
 	
+	@Test(expected = java.lang.AssertionError.class)
+	public void test9EncryptRSAFalse() throws Exception{
+		  KeyPair keypair1;
+		  KeyPair keypair2;
+		   String test = "Prueba";
+		   System.out.println("Length of string to encrypt: " + test.length());
+		  
+		  byte[] data = test.getBytes("UTF-8");
+		     System.out.println("Texto a encriptar: " + test);
+		     System.out.println("Texto a encriptar (array): " + data);
+		     System.out.println("Tamaño del texto (array): " + data.length);
+		  
+		     keypair1 = CryptoRSA.generateKeyPair();
+		     keypair2 = CryptoRSA.generateKeyPair();
+		     Key publicKey = keypair1.getPublic();
+		     Key privateKey = keypair2.getPrivate();
+		     
+		     
+		     System.out.println("Keypair generated......");
+		  
+		     byte[] encrypted = CryptoRSA.encrypt(data, publicKey);
+		     System.out.println("Texto encriptado (array): " + encrypted);
+		     System.out.println("Texto encriptado: " + new String (encrypted));
+		     System.out.println("Tamaño del texto (array): " + encrypted.length);
+		   
+		  
+		     
+		     byte[] decrypted = CryptoRSA.decrypt(encrypted, privateKey);
+		     System.out.println("Texto desencriptado (array): " + decrypted);
+		     System.out.println("Texto desencriptado: " + new String (decrypted));
+		     System.out.println("Tamaño del texto (array): " + decrypted.length);
+		     
+		   
+		  
+		     System.out.println("Original-data == decrypted data : " + Arrays.equals(data, decrypted));
+		     String a = new String(decrypted);
+		     Assert.assertTrue(test.equals(a));
+	}
+	
 	@Test
 	public void pruebaDefensaRemote() throws Exception{
 		
