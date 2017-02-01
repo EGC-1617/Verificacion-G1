@@ -1,6 +1,8 @@
 package test.java;
 
 import java.math.BigInteger;
+import java.security.Key;
+import java.security.KeyPair;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -18,11 +21,12 @@ import org.junit.runners.MethodSorters;
 
 import main.java.Authority;
 import main.java.AuthorityImpl;
+import main.java.CryptoRSA;
 import main.java.VerificationException;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-/*En esta clase estarán implementados todos los métodos que ya han sido implementos en la clase VerificacionTest, pero 
-en este caso, todas las pruebas se harán con una base de datos local, ya que en la clase VerificacionTest los métodos
+/*En esta clase estarÃ¡n implementados todos los mÃ©todos que ya han sido implementos en la clase VerificacionTest, pero 
+en este caso, todas las pruebas se harÃ¡n con una base de datos local, ya que en la clase VerificacionTest los mÃ©todos
 hacen uso de una base de datos remota. */
 public class VerificacionTestLocal {
 	
@@ -87,8 +91,8 @@ public class VerificacionTestLocal {
 	}
 	
 	/*
-	 *Cuando hacemos uso del método postKey obtenemos las claves publica y privada según el
-	 *id de votación pasado.
+	 *Cuando hacemos uso del mÃ©todo postKey obtenemos las claves publica y privada segÃºn el
+	 *id de votaciÃ³n pasado.
 	 */
 	
 	
@@ -127,7 +131,7 @@ public class VerificacionTestLocal {
 		token = 123456789;
 		System.out.println("ID Votacion: " + votationId);
 		System.out.println("Token: " + token);
-		System.out.println("El id votación no está icnluido entonces el metodo postKey da error.");
+		System.out.println("El id votaciÃ³n no estÃ¡ icnluido entonces el metodo postKey da error.");
 		System.out.println("-----------------------------------------------------------------------\n\n");
 		res = auth.postKey(votationId, token);
 		System.out.println(res);
@@ -143,7 +147,7 @@ public class VerificacionTestLocal {
 		
 		String votationId =null;
 		System.out.println("ID Votacion: " + votationId);
-		System.out.println("Estamos pasando una votación nula, entonces no podemos crear el token");
+		System.out.println("Estamos pasando una votaciÃ³n nula, entonces no podemos crear el token");
 		System.out.println("-----------------------------------------------------------------------\n\n");
 		
 		Integer token = calculateToken(new Integer(votationId));
@@ -330,6 +334,99 @@ public class VerificacionTestLocal {
 		Assert.assertTrue(res == 1);
 	
 
+	}
+	
+	@Test
+	public void test9EncryptRSALocal() throws Exception{
+		  KeyPair keypair;
+		  String votationId;
+			
+			Integer token2;
+			
+			
+			votationId = (new BigInteger(25, new SecureRandom())).toString();
+			token2 = calculateToken(new Integer(votationId));		
+			
+			idUtilizados.add(votationId);
+			
+			auth.postKey(votationId, token2);
+    
+		   String test = "Prueba";
+		   System.out.println("Length of string to encrypt: " + test.length());
+		  
+		  byte[] data = test.getBytes("UTF-8");
+		     System.out.println("Texto a encriptar: " + test);
+		     System.out.println("Texto a encriptar (array): " + data);
+		     System.out.println("Tamaño del texto (array): " + data.length);
+		  
+		     keypair = CryptoRSA.generateKeyPair();
+		     Key publicKey = keypair.getPublic();
+		     Key privateKey = keypair.getPrivate();
+		     
+		     System.out.println("Keypair generated......");
+		  
+		     byte[] encrypted = CryptoRSA.encrypt(votationId,data, publicKey,token2);
+		     System.out.println("Texto encriptado (array): " + encrypted);
+		     System.out.println("Texto encriptado: " + new String (encrypted));
+		     System.out.println("Tamaño del texto (array): " + encrypted.length);
+		   
+		  
+		     
+		     byte[] decrypted = CryptoRSA.decrypt(votationId,encrypted, privateKey,token2);
+		     System.out.println("Texto desencriptado (array): " + decrypted);
+		     System.out.println("Texto desencriptado: " + new String (decrypted));
+		     System.out.println("Tamaño del texto (array): " + decrypted.length);
+		     
+		   
+		  
+		     System.out.println("Original-data == decrypted data : " + Arrays.equals(data, decrypted));
+		     String a = new String(decrypted);
+		     Assert.assertTrue(test.equals(a));
+	}
+	
+	@Test(expected = java.lang.AssertionError.class)
+	public void test10EncryptRSAFalseLocal() throws Exception{
+		  KeyPair keypair1;
+		  KeyPair keypair2;
+		  String votationId;
+			
+			Integer token2;
+			
+			
+			votationId = (new BigInteger(25, new SecureRandom())).toString();
+			token2 = calculateToken(new Integer(votationId));		
+			
+			idUtilizados.add(votationId);
+			
+			auth.postKey(votationId, token2);
+		   String test = "Prueba";
+		   System.out.println("Length of string to encrypt: " + test.length());
+		  
+		  byte[] data = test.getBytes("UTF-8");
+		     System.out.println("Texto a encriptar: " + test);
+		     System.out.println("Texto a encriptar (array): " + data);
+		     System.out.println("Tamaño del texto (array): " + data.length);
+		  
+		     keypair1 = CryptoRSA.generateKeyPair();
+		     keypair2 = CryptoRSA.generateKeyPair();
+		     Key publicKey = keypair1.getPublic();
+		     Key privateKey = keypair2.getPrivate();
+		     
+		     System.out.println("Keypair generated......");
+		  
+		     byte[] encrypted = CryptoRSA.encrypt(votationId,data, publicKey,token2);
+		     System.out.println("Texto encriptado (array): " + encrypted);
+		     System.out.println("Texto encriptado: " + new String (encrypted));
+		     System.out.println("Tamaño del texto (array): " + encrypted.length);
+		     
+		     byte[] decrypted = CryptoRSA.decrypt(votationId,encrypted, privateKey,token2);
+		     System.out.println("Texto desencriptado (array): " + decrypted);
+		     System.out.println("Texto desencriptado: " + new String (decrypted));
+		     System.out.println("Tamaño del texto (array): " + decrypted.length);
+		     
+		     System.out.println("Original-data == decrypted data : " + Arrays.equals(data, decrypted));
+		     String a = new String(decrypted);
+		     Assert.assertTrue(test.equals(a));
 	}
 	
 }
