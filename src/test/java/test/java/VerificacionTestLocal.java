@@ -133,7 +133,7 @@ public class VerificacionTestLocal {
 		System.out.println("Token: " + token);
 		System.out.println("El id votaciÃ³n no estÃ¡ icnluido entonces el metodo postKey da error.");
 		System.out.println("-----------------------------------------------------------------------\n\n");
-		res = auth.postKey(votationId, token);
+		res = auth.postKeyLocal(votationId, token);
 		System.out.println(res);
 				
 		
@@ -153,7 +153,7 @@ public class VerificacionTestLocal {
 		Integer token = calculateToken(new Integer(votationId));
 		
 		
-		res = auth.postKey(votationId, token);
+		res = auth.postKeyLocal(votationId, token);
 		
 		idUtilizados.add(votationId);
 		
@@ -187,7 +187,7 @@ public class VerificacionTestLocal {
 		System.out.println("Desencriptado" + desencriptado);
 		Assert.assertTrue(encrypText.equals(desencriptado));
 		System.out.println("El token no coincicide, test4EncryptDecryptTest1Local");
-		auth.postKey(votationId, token2);
+		auth.postKeyLocal(votationId, token2);
 	}
 	
 	@Test
@@ -204,12 +204,12 @@ public class VerificacionTestLocal {
 		
 		idUtilizados.add(votationId);
 		
-		auth.postKey(votationId, token2);
+		auth.postKeyLocal(votationId, token2);
 		
 		encrypText = "prueba prueba";
 		
 	
-		encriptado = auth.encrypt(votationId, encrypText, token2);
+		encriptado = auth.encryptLocal(votationId, encrypText, token2);
 		
 		//---------------------------------
 		System.out.println(encriptado);
@@ -217,7 +217,7 @@ public class VerificacionTestLocal {
 		System.out.println(encriptado.toString());
 		aux=encriptado.toString();
 		System.out.println(aux);
-		desencriptado = auth.decrypt(votationId, encriptado, token2);
+		desencriptado = auth.decryptLocal(votationId, encriptado, token2);
 		System.out.println(desencriptado);
 		Assert.assertTrue(encrypText.equals(desencriptado));
 	}
@@ -237,7 +237,7 @@ public class VerificacionTestLocal {
 		
 		idUtilizados.add(votationId);
 		
-		auth.postKey(votationId, token2);
+		auth.postKeyLocal(votationId, token2);
 		
 		encrypText = "prueba prueba";
 		
@@ -269,17 +269,17 @@ public class VerificacionTestLocal {
 		
 		idUtilizados.add(votationId);
 		
-		auth.postKey(votationId, token2);
+		auth.postKeyLocal(votationId, token2);
 		
 		encrypText = "";
 		
-		encriptado = auth.encrypt(votationId, encrypText, token2);
+		encriptado = auth.encryptLocal(votationId, encrypText, token2);
 		
 		//---------------------------------
 		
 		String desencriptado;
 		
-		desencriptado = auth.decrypt(votationId, encriptado, token2);
+		desencriptado = auth.decryptLocal(votationId, encriptado, token2);
 		System.out.println(desencriptado);
 	}
 	
@@ -331,7 +331,7 @@ public class VerificacionTestLocal {
 	        }
 	    }
 		System.out.println(res);
-		Assert.assertTrue(res == 1);
+		Assert.assertTrue(res == 5);
 	
 
 	}
@@ -349,7 +349,7 @@ public class VerificacionTestLocal {
 			
 			idUtilizados.add(votationId);
 			
-			auth.postKey(votationId, token2);
+			auth.postKeyLocal(votationId, token2);
     
 		   String test = "Prueba";
 		   System.out.println("Length of string to encrypt: " + test.length());
@@ -365,14 +365,14 @@ public class VerificacionTestLocal {
 		     
 		     System.out.println("Keypair generated......");
 		  
-		     byte[] encrypted = CryptoRSA.encrypt(votationId,data, publicKey,token2);
+		     byte[] encrypted = CryptoRSA.encryptLocal(votationId,data, publicKey,token2);
 		     System.out.println("Texto encriptado (array): " + encrypted);
 		     System.out.println("Texto encriptado: " + new String (encrypted));
 		     System.out.println("Tamaño del texto (array): " + encrypted.length);
 		   
 		  
 		     
-		     byte[] decrypted = CryptoRSA.decrypt(votationId,encrypted, privateKey,token2);
+		     byte[] decrypted = CryptoRSA.decryptLocal(votationId,encrypted, privateKey,token2);
 		     System.out.println("Texto desencriptado (array): " + decrypted);
 		     System.out.println("Texto desencriptado: " + new String (decrypted));
 		     System.out.println("Tamaño del texto (array): " + decrypted.length);
@@ -398,7 +398,7 @@ public class VerificacionTestLocal {
 			
 			idUtilizados.add(votationId);
 			
-			auth.postKey(votationId, token2);
+			auth.postKeyLocal(votationId, token2);
 		   String test = "Prueba";
 		   System.out.println("Length of string to encrypt: " + test.length());
 		  
