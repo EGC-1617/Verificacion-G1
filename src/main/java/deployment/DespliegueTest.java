@@ -10,13 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import main.java.Authority;
 import main.java.AuthorityImpl;
 
 public class DespliegueTest {
 
-	private String voto;
+	private JTextField datos;
 	
 	private JButton md5_encript;
 	private JButton md5_desencript;
@@ -131,18 +132,15 @@ public class DespliegueTest {
 		label.setBounds(106, 85, 102, 14);
 		frame1.getContentPane().add(label);
 		
-		JTextArea datos = new JTextArea();
-		datos.setBounds(218, 81, 500, 34);
-		datos.setText("VOTO DE EJEMPLO");
+		datos = new JTextField();
+		datos.setBounds(218, 75, 500, 34);
 		frame1.getContentPane().add(datos);
 		
 		//<-----------------------------------MD5----------------------------------------->
 		
 		md5_encript = new JButton("Encriptar(MD5)");
-		md5_encript.setBounds(139, 138, 127, 23);
+		md5_encript.setBounds(185, 133, 127, 23);
 		frame1.getContentPane().add(md5_encript);
-		
-		voto = datos.getText();
 		 
 		
 		md5_encript.addActionListener(new ActionListener(){
@@ -157,7 +155,7 @@ public class DespliegueTest {
 		    	  token = calculateToken(new Integer(votationId));
 		    	  au.postKeyLocal(votationId, token);
 		    	  
-		    	  voto_md5_encript = au.encryptLocal(votationId, voto, token);
+		    	  voto_md5_encript = au.encryptLocal(votationId, datos.getText(), token);
 		    	  frame2 = new JFrame();
 		    	  frame2.getContentPane().setLayout(null);
 		  		
