@@ -388,23 +388,18 @@ public class VerificacionTest {
 		     Key publicKey = keypair1.getPublic();
 		     Key privateKey = keypair2.getPrivate();
 		     
-		     
 		     System.out.println("Keypair generated......");
 		  
 		     byte[] encrypted = CryptoRSA.encrypt(votationId,data, publicKey,token2);
 		     System.out.println("Texto encriptado (array): " + encrypted);
 		     System.out.println("Texto encriptado: " + new String (encrypted));
 		     System.out.println("Tamaño del texto (array): " + encrypted.length);
-		   
-		  
 		     
 		     byte[] decrypted = CryptoRSA.decrypt(votationId,encrypted, privateKey,token2);
 		     System.out.println("Texto desencriptado (array): " + decrypted);
 		     System.out.println("Texto desencriptado: " + new String (decrypted));
 		     System.out.println("Tamaño del texto (array): " + decrypted.length);
 		     
-		   
-		  
 		     System.out.println("Original-data == decrypted data : " + Arrays.equals(data, decrypted));
 		     String a = new String(decrypted);
 		     Assert.assertTrue(test.equals(a));
