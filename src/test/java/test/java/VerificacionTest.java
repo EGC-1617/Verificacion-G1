@@ -1,6 +1,7 @@
 package test.java;
 
 import java.math.BigInteger;
+import java.security.Key;
 import java.security.KeyPair;
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -312,31 +313,39 @@ public class VerificacionTest {
 	
 	@Test
 	public void test9EncryptRSA() throws Exception{
-		KeyPair keypair;
-		String votationId;
-		String encrypText;
-		
-		votationId = (new BigInteger(25, new SecureRandom())).toString();
-		idUtilizados.add(votationId);
-		
-		keypair=CryptoRSA.generateKeyPair(votationId);
-		
-		encrypText = "";
-		
-	
-		String encriptado = CryptoRSA.encrypt(encrypText, keypair.getPublic());
-		byte[] aux= encriptado.getBytes();
-		byte[] primeraMitad=Arrays.copyOfRange(aux, 0, aux.length/2);
-		byte[] segundaMitad=Arrays.copyOfRange(aux, aux.length/2, aux.length);
-		String encriptado1 =primeraMitad.toString().concat(segundaMitad.toString());
-		//---------------------------------
-		//System.out.println(encriptado);
-		System.out.println(encriptado1);
-		//String desencriptado;
-
-		//desencriptado = CryptoRSA.decrypt(encriptado, keypair.getPrivate());
-		//System.out.println(desencriptado);
-		//Assert.assertTrue(encrypText.equals(desencriptado));
+		  KeyPair keypair;
+    
+		   String test = "Prueba";
+		   System.out.println("Length of string to encrypt: " + test.length());
+		  
+		  byte[] data = test.getBytes("UTF-8");
+		     System.out.println("Texto a encriptar: " + test);
+		     System.out.println("Texto a encriptar (array): " + data);
+		     System.out.println("Tamaño del texto (array): " + data.length);
+		  
+		     keypair = CryptoRSA.generateKeyPair();
+		     Key publicKey = keypair.getPublic();
+		     Key privateKey = keypair.getPrivate();
+		     
+		     System.out.println("Keypair generated......");
+		  
+		     byte[] encrypted = CryptoRSA.encrypt(data, publicKey);
+		     System.out.println("Texto encriptado (array): " + encrypted);
+		     System.out.println("Texto encriptado: " + new String (encrypted));
+		     System.out.println("Tamaño del texto (array): " + encrypted.length);
+		   
+		  
+		     
+		     byte[] decrypted = CryptoRSA.decrypt(encrypted, privateKey);
+		     System.out.println("Texto desencriptado (array): " + decrypted);
+		     System.out.println("Texto desencriptado: " + new String (decrypted));
+		     System.out.println("Tamaño del texto (array): " + decrypted.length);
+		     
+		   
+		  
+		     System.out.println("Original-data == decrypted data : " + Arrays.equals(data, decrypted));
+		     String a = new String(decrypted);
+		     Assert.assertTrue(test.equals(a));
 	}
 	
 	
