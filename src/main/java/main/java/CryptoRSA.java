@@ -82,5 +82,62 @@ public class CryptoRSA {
 
 		return text;
 	}
+	
+	
+	/**
+	 *  Método que dado un voto y una clave pública, encripta usando RSA
+	 *  
+	 * @param textToEncypt
+	 *            : Voto sin encriptar
+	 * @param publicKey
+	 *            : Clave publica
+	 * @return Voto encriptado
+	 */
+	public static byte[] encryptLocal (String votationId,byte[] textToEncypt, Key publicKey, Integer token) {
+		byte[] cipherText = new byte[0];
+
+		try {
+			if(TokenLocal.checkTokenDb(new Integer(votationId), token))
+			// Obtener el tipo de encriptacion que vamos a realizar
+			rsa = Cipher.getInstance("RSA");
+			
+			// Encripta
+			rsa.init(Cipher.ENCRYPT_MODE, publicKey);
+			cipherText = rsa.doFinal(textToEncypt);
+
+		} catch (Exception e) {
+			System.out.println("encrypt exception: " + e.getMessage());
+		}
+
+		return cipherText;
+	}
+
+	/**
+	 * Método que dado un voto y una clave privada, desencripta usando RSA
+	 * 
+	 * @param cipherText
+	 *            : Voto encriptado
+	 * @param privateKey
+	 *             : Clave privada
+	 * @return Voto desencriptado
+	 */
+	public static byte[] decryptLocal (String votationId,byte[] cipherText, Key privateKey,Integer token) {
+		byte[] text = new byte[0];
+
+		try {
+			if(TokenLocal.checkTokenDb(new Integer(votationId), token))
+			// Obtener el tipo de encriptacion que vamos a realizar
+			rsa = Cipher.getInstance("RSA");
+			
+			// Desencripta
+			rsa.init(Cipher.DECRYPT_MODE, privateKey);
+			text = rsa.doFinal(cipherText);
+
+		} catch (Exception e) {
+			System.out.println("decrypt exception: " + e.getMessage());
+		}
+
+		return text;
+	}
 
 }
