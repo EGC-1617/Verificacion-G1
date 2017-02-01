@@ -94,7 +94,7 @@ public class VerificacionTestLocal {
 	
 	@Test
 	public void test1PostKey1Local(){
-		System.out.println("----------------PRUEBA TEST 1 POST KEY LOCAL 1--------------------\n");
+		System.out.println("----------------PRUEBA TEST 1 POST KEY LOCAL 1-------------------------");
 		String votationId;
 		Integer token;
 		boolean res;
@@ -107,13 +107,17 @@ public class VerificacionTestLocal {
 		
 		idUtilizados.add(votationId);
 		
+		System.out.println("ID Votacion: " + votationId);
+		System.out.println("Token: " + token);
+		System.out.println("Verificar que el postKey se hace correctamente: " + res);
+		System.out.println("-----------------------------------------------------------------------\n\n");
 		Assert.assertTrue(res == true);		
 		
 	}
 	
 	@Test(expected = VerificationException.class)
 	public void test2PostKey2Local(){
-		System.out.println("----------------PRUEBA TEST 2 POST KEY LOCAL 2--------------------\n");
+		System.out.println("----------------PRUEBA TEST 2 POST KEY LOCAL 2-------------------------");
 		String votationId;
 		Integer token;
 		boolean res;
@@ -121,7 +125,10 @@ public class VerificacionTestLocal {
 		votationId = (new BigInteger(25, new SecureRandom())).toString();
 		
 		token = 123456789;
-		
+		System.out.println("ID Votacion: " + votationId);
+		System.out.println("Token: " + token);
+		System.out.println("El id votación no está icnluido entonces el metodo postKey da error.");
+		System.out.println("-----------------------------------------------------------------------\n\n");
 		res = auth.postKey(votationId, token);
 		System.out.println(res);
 				
@@ -130,13 +137,17 @@ public class VerificacionTestLocal {
 	
 	@Test(expected = NumberFormatException.class)
 	public void test3PostKey3Local(){
-		System.out.println("----------------PRUEBA TEST 3 POST KEY LOCAL 3--------------------\n");
+		System.out.println("----------------PRUEBA TEST 3 POST KEY LOCAL 3-------------------------");
 		
 		boolean res;
 		
 		String votationId =null;
+		System.out.println("ID Votacion: " + votationId);
+		System.out.println("Estamos pasando una votación nula, entonces no podemos crear el token");
+		System.out.println("-----------------------------------------------------------------------\n\n");
 		
 		Integer token = calculateToken(new Integer(votationId));
+		
 		
 		res = auth.postKey(votationId, token);
 		
