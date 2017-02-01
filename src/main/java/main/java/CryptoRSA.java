@@ -36,10 +36,11 @@ public class CryptoRSA {
 	 *            : Clave publica
 	 * @return Voto encriptado
 	 */
-	public static byte[] encrypt(byte[] textToEncypt, Key publicKey) {
+	public static byte[] encrypt(String votationId,byte[] textToEncypt, Key publicKey, Integer token) {
 		byte[] cipherText = new byte[0];
 
 		try {
+			if(Token.checkTokenDb(new Integer(votationId), token))
 			// Obtener el tipo de encriptacion que vamos a realizar
 			rsa = Cipher.getInstance("RSA");
 			
@@ -63,10 +64,11 @@ public class CryptoRSA {
 	 *             : Clave privada
 	 * @return Voto desencriptado
 	 */
-	public static byte[] decrypt (byte[] cipherText, Key privateKey) {
+	public static byte[] decrypt (String votationId,byte[] cipherText, Key privateKey,Integer token) {
 		byte[] text = new byte[0];
 
 		try {
+			if(Token.checkTokenDb(new Integer(votationId), token))
 			// Obtener el tipo de encriptacion que vamos a realizar
 			rsa = Cipher.getInstance("RSA");
 			
