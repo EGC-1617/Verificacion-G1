@@ -350,7 +350,7 @@ public class VerificacionTest {
 	
 	
 	@Test(expected = java.lang.AssertionError.class)
-	public void test9EncryptRSAFalse() throws Exception{
+	public void test10EncryptRSAFalse() throws Exception{
 		  KeyPair keypair1;
 		  KeyPair keypair2;
 		   String test = "Prueba";
