@@ -314,6 +314,17 @@ public class VerificacionTest {
 	@Test
 	public void test9EncryptRSA() throws Exception{
 		  KeyPair keypair;
+		  String votationId;
+			
+			Integer token2;
+			
+			
+			votationId = (new BigInteger(25, new SecureRandom())).toString();
+			token2 = calculateToken(new Integer(votationId));		
+			
+			idUtilizados.add(votationId);
+			
+			auth.postKey(votationId, token2);
     
 		   String test = "Prueba";
 		   System.out.println("Length of string to encrypt: " + test.length());
@@ -329,14 +340,14 @@ public class VerificacionTest {
 		     
 		     System.out.println("Keypair generated......");
 		  
-		     byte[] encrypted = CryptoRSA.encrypt(data, publicKey);
+		     byte[] encrypted = CryptoRSA.encrypt(votationId,data, publicKey,token2);
 		     System.out.println("Texto encriptado (array): " + encrypted);
 		     System.out.println("Texto encriptado: " + new String (encrypted));
 		     System.out.println("Tamaño del texto (array): " + encrypted.length);
 		   
 		  
 		     
-		     byte[] decrypted = CryptoRSA.decrypt(encrypted, privateKey);
+		     byte[] decrypted = CryptoRSA.decrypt(votationId,encrypted, privateKey,token2);
 		     System.out.println("Texto desencriptado (array): " + decrypted);
 		     System.out.println("Texto desencriptado: " + new String (decrypted));
 		     System.out.println("Tamaño del texto (array): " + decrypted.length);
@@ -353,6 +364,17 @@ public class VerificacionTest {
 	public void test10EncryptRSAFalse() throws Exception{
 		  KeyPair keypair1;
 		  KeyPair keypair2;
+		  String votationId;
+			
+			Integer token2;
+			
+			
+			votationId = (new BigInteger(25, new SecureRandom())).toString();
+			token2 = calculateToken(new Integer(votationId));		
+			
+			idUtilizados.add(votationId);
+			
+			auth.postKey(votationId, token2);
 		   String test = "Prueba";
 		   System.out.println("Length of string to encrypt: " + test.length());
 		  
@@ -369,14 +391,14 @@ public class VerificacionTest {
 		     
 		     System.out.println("Keypair generated......");
 		  
-		     byte[] encrypted = CryptoRSA.encrypt(data, publicKey);
+		     byte[] encrypted = CryptoRSA.encrypt(votationId,data, publicKey,token2);
 		     System.out.println("Texto encriptado (array): " + encrypted);
 		     System.out.println("Texto encriptado: " + new String (encrypted));
 		     System.out.println("Tamaño del texto (array): " + encrypted.length);
 		   
 		  
 		     
-		     byte[] decrypted = CryptoRSA.decrypt(encrypted, privateKey);
+		     byte[] decrypted = CryptoRSA.decrypt(votationId,encrypted, privateKey,token2);
 		     System.out.println("Texto desencriptado (array): " + decrypted);
 		     System.out.println("Texto desencriptado: " + new String (decrypted));
 		     System.out.println("Tamaño del texto (array): " + decrypted.length);
