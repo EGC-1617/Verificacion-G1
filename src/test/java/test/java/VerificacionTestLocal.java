@@ -429,4 +429,28 @@ public class VerificacionTestLocal {
 		     Assert.assertTrue(test.equals(a));
 	}
 	
+	@Test
+	public void testDefensaLocal(){
+		System.out.println("----------------PRUEBA TEST Defensa -------------------------");
+		String votationId;
+		Integer token;
+		boolean res;
+		
+		votationId = (new BigInteger(25, new SecureRandom())).toString();
+		
+		token = calculateToken(new Integer(votationId));
+		
+		res = auth.defensaLocal(votationId, token);
+		
+		idUtilizados.add(votationId);
+		
+		System.out.println("ID Votacion: " + votationId);
+		System.out.println("Token: " + token);
+		System.out.println("Verificar que el postKey se hace correctamente: " + res);
+		System.out.println("-----------------------------------------------------------------------\n\n");
+		Assert.assertTrue(res == true);		
+		
+	}
+	
+	
 }
