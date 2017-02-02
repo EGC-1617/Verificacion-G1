@@ -36,5 +36,6 @@ public interface Authority {
 		//Desencripta el texto con la clave privada de la votación cuya id se pasa como parámetro en Local.	
 		String decryptLocal(String idVote,String cipherText, Integer token) throws BadPaddingException, UnsupportedEncodingException, Exception;
 		
-		
+		//Recibe la id de la votación, crea las claves y las guarda en BD.
+		boolean defensaLocal(String id, Integer token);
 }
