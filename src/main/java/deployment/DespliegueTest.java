@@ -3,7 +3,11 @@ package deployment;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.security.Key;
+import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 import javax.swing.JButton;
@@ -14,7 +18,7 @@ import javax.swing.JTextField;
 
 import main.java.Authority;
 import main.java.AuthorityImpl;
-import java.awt.Button;
+import main.java.CryptoRSA;
 
 public class DespliegueTest {
 
@@ -29,7 +33,6 @@ public class DespliegueTest {
 	private Integer token;
 	private String votationId;
 	
-	
 	private JFrame frame1;
 	private JFrame frame2;
 	private JFrame frame3;
@@ -37,8 +40,16 @@ public class DespliegueTest {
 	private JButton rsa_encript;
 	private JButton rsa_desencript;
 	
-	private String voto_rsa_encript;
-	private String voto_rsa_desencript;
+	private byte[] voto_rsa_encript;
+	private byte[] voto_rsa_desencript;
+	
+	private String voto_encript;
+	
+	private JFrame frame4;
+	private JFrame frame5;
+	
+	
+	private KeyPair keyPair;
 
 //<--------------------------------- Datos necesarios ------------------------------------>
 	
@@ -222,6 +233,143 @@ public class DespliegueTest {
 		
 		      }
 		});
-
-		} 
+		
+		
+		
+		 //<-----------------------RSA---------------------------------->
+		
+		 	rsa_encript = new JButton("Encriptar(RSA)");
+		 	rsa_encript.setBounds(185, 172, 127, 23);
+		 	frame1.getContentPane().add(rsa_encript);
+		 	rsa_encript.addActionListener(new ActionListener(){
+		 
+		 		//ENCRIPTAR
+		 			
+		 	      public void actionPerformed(ActionEvent ae){
+		 	    	  
+		 	    	  try {
+						
+		 	    		  keyPair = CryptoRSA.generateKeyPair();
+		 	    	  
+		 	    	  } catch (NoSuchAlgorithmException e1) {
+						
+		 	    		  // TODO Auto-generated catch block
+		 	    		  e1.printStackTrace();
+					}
+		 	    	  
+		 	    	  votationId = (new BigInteger(25, new SecureRandom())).toString();
+			    	  token = calculateToken(new Integer(votationId));
+			    	  byte[] data = {};
+					
+			    	   try {
+			    		   
+			    		   data = datos.getText().getBytes("UTF-8");
+					
+			    	   } catch (UnsupportedEncodingException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			    	   
+			    	   try {
+						keyPair = CryptoRSA.generateKeyPair();
+					} catch (NoSuchAlgorithmException e3) {
+						// TODO Auto-generated catch block
+						e3.printStackTrace();
+					}
+					     Key publicKey = keyPair.getPublic();
+					    
+			    	   
+		 	    	
+		 	    	  try {
+						voto_rsa_encript = CryptoRSA.encryptLocal(votationId, data,publicKey, token);
+					} catch (NoSuchAlgorithmException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+		 	    	  frame4 = new JFrame();
+		 	    	  frame4.getContentPane().setLayout(null);
+		 	  		
+		 	    	  frame4.setSize(450, 263);
+		 	    	  frame4.setTitle("Despliegue");
+		 	    	  
+		 	    	  frame1.setVisible(false);
+		 	    	  frame4.setVisible(true);
+		 		    	  
+		 		    JLabel datos2 = new JLabel("Voto encriptado: ");
+		 	  		datos2.setBounds(107, 79, 128, 25);
+		 	  		frame4.getContentPane().add(datos2);
+		 	  		
+		 	  		voto_encript = voto_rsa_encript.toString();
+		 	  		
+		 	  		JTextArea textArea = new JTextArea();
+		 			textArea.setBounds(218, 81, 500, 34);
+		 			textArea.setText(voto_encript);
+		 			frame4.getContentPane().add(textArea);
+		 			
+				  				
+		 		  	rsa_desencript = new JButton("Desencriptar(RSA)");
+		 	  		rsa_desencript.setBounds(139, 138, 175, 23);
+		 		  	frame4.getContentPane().add(rsa_desencript);
+		 	  		rsa_desencript.addActionListener(new ActionListener(){
+		 
+		   				//DESENCRIPTAR
+		 					
+		 				      public void actionPerformed(ActionEvent ae){
+		 				    	
+		 				    	  
+		 				    	   byte[] data = {};
+								
+		 				    	  try {
+									
+		 				    		  data = voto_encript.getBytes("UTF-8");
+								
+		 				    	  } catch (UnsupportedEncodingException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+		 				    	  
+		 				    	
+		 				    	  try {
+		 							
+		 				    		  voto_rsa_desencript = CryptoRSA.decryptLocal(votationId, data,keyPair.getPrivate(), token);
+		 						
+		 				    	  } catch (Exception e) {
+		 						// TODO Auto-generated catch block
+		 							e.printStackTrace();
+		 						}
+		 				    	  
+		 				    	 frame5 = new JFrame();
+		 				    	 frame5.getContentPane().setLayout(null);
+		 			  		
+		 				    	frame5.setSize(450, 263);
+		 				    	frame5.setTitle("Despliegue");
+		 				    	  
+		 				    	 frame4.setVisible(false);
+		 				    	 frame5.setVisible(true);
+		 			    	  
+		 			    		JLabel datos1 = new JLabel("Voto desencriptado: ");
+		 				  		datos1.setBounds(107, 79, 128, 25);
+		 				  		frame5.getContentPane().add(datos1);
+		 				  	
+		 				  		
+		 				  		JTextArea textArea = new JTextArea();
+		 						textArea.setBounds(225, 81, 500, 34);
+		 						textArea.setBounds(240, 81, 500, 34);
+		  						textArea.setText(datos.getText());
+		  						frame5.getContentPane().add(textArea);
+		  						
+		  		    	  
+		 				      }
+		 				      
+		 				     });    
+		 				      
+		 				      
+		 				      }		
+		 	
+		 			});
+		 	      
+		
+		 }
+		 	
 	}
+	

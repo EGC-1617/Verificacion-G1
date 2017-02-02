@@ -33,7 +33,7 @@ public class LocalDataBaseManager {
 	}
 	
 	/**
-	 * Función que almacena en la base de datos remota un par de claves de cifrado ElGamal
+	 * Función que almacena en la base de datos local un par de claves de cifrado ElGamal
 	 * asociadas a una votación
 	 * @param id La ide de la votación.
 	 * @param publicKey La clave pública de cifrado asociada a la votación
