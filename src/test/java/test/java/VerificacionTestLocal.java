@@ -336,7 +336,7 @@ public class VerificacionTestLocal {
 
 	}
 	
-	@Test
+	
 	public void test9EncryptRSALocal() throws Exception{
 		  KeyPair keypair;
 		  String votationId;
@@ -347,9 +347,6 @@ public class VerificacionTestLocal {
 			votationId = (new BigInteger(25, new SecureRandom())).toString();
 			token2 = calculateToken(new Integer(votationId));		
 			
-			idUtilizados.add(votationId);
-			
-			auth.postKeyLocal(votationId, token2);
     
 		   String test = "Prueba";
 		   System.out.println("Length of string to encrypt: " + test.length());
