@@ -64,9 +64,9 @@ public class VerificacionTest {
 	}  
 	
 	private static Connection getDatabaseConnection(){
-		String USER = "sql7148220";
-	    String PASS = "F7NDgNATA1";  
-	    String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com:3306/sql7148220";
+		String USER = "sql8193781";
+	    String PASS = "99mh1leSh5";  
+	    String DB_URL = "jdbc:mysql://sql8.freesqldatabase.com:3306/sql8193781";
 	    
 	    Connection conn = null;
 	    
