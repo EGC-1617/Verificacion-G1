@@ -1,6 +1,7 @@
 package main.java;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 
@@ -38,4 +39,7 @@ public interface Authority {
 		
 		//Recibe la id de la votación, crea las claves y las guarda en BD.
 		boolean defensaLocal(String id, Integer token);
+		
+		//Recibe un texto, lo encripta y desencripta, y comprueba que es correcto.
+		public List<String> encriptarYDesencriptar (String texto);
 }
