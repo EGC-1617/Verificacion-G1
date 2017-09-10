@@ -16,10 +16,10 @@ deploy:
     provider: releases
     api_key:
         secure: RuBDCKz+9rq02ig+J+YoBudOfwGcfozrZAasU4X9f0tb8jz0G8R6pokw3MRR4sqbPte2CKnFL6TcTEoKieQP9soV/ywrnsMS6bcm2r2fv8+QmE/gMDCl4J3YPX9Nkh4T2Lehl8zOeZw63UZQivGnrhaL+aSQS2I9YKrnIukx8Gn/vG8Tl1JmtvuwK4fzHpBTt3iSWsHxIKLUsThJRuBPtN93bqYrhwzBnOOuA3Kcqfr3/bSsTd/jsyxQbFS85kL/EyPkVQcxhh1Sz6lO+abtf++IMTQ+Vx8hRY1d0itPtNDHXRw/XgMWPUfAMsov83BDYzl60e/Xlq2wpoGcgom2R+hf4PYbeYm5Wy6A5oYP0PoCUVwW/PZ2gJOJSSORfMaFtjecGZcQH5HWH03s57vh1I3plbhB8KPTvEzqCJvJJmCD3cJQ52GfUof/HLR7xpEPo1vQcidap2jtDLaszvRQ+dmgb+AKvM+kUXcovvskY1+aM5puLoy8RJzwLKkaUav8E2kIFmBWVPPCY2s8/MQqTh1e3eOrkDDd4WPwqSOGxscj3PbtCWiljvGHUIb3OzeLApt5UEpWNFJIE72mLlj3dEr9/VEjCvhvYA2PW/yi1RlFGIUvSZrsQ+/dszZAyiQch4jXxbgmv9wXTAEW79+zXzp6TyTNcW1jGFm13ki1nZA=
-    file: /home/travis/build/EGC-1617/Verificacion-G1/target/Verificacion1.jar
+    file: /home/travis/build/EGC-1617/Verificacion-G13/target/Verificacion1.jar
     skip_cleanup: true
     on:
-        repo: EGC-1617/Verificacion-G1
+        repo: EGC-1617/Verificacion-G13
         tags: true
         branch: master
         overwrite: true
