@@ -2,13 +2,16 @@ package main.java;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.junit.Assert;
 
 
 public class AuthorityImpl implements Authority{
@@ -384,6 +387,40 @@ public class AuthorityImpl implements Authority{
 		return res;
 	}
 	
+	
+	
+	/**
+	 * Esta función encripta un texto para después desencriptarlo.
+	 * Comprueba que el texto original y el desencriptado son iguales. 
+	 * Puedes comparar los valores de resultado para comprobar que lo hace correctamente.
+	 * 
+	 * @param texto: Texto sin encriptar
+	 * @return resultado: Lista que contiene en la pos(0) el texto original, 
+	 * en la pos(1) el texto enciptado, y en la pos(3) el texto desencriptado
+	 */
+	public List<String> encriptarYDesencriptar (String texto) {
+		String textoEncriptado;
+		String textoDesencriptado;
+		List <String> resultado;
+		
+		resultado = new ArrayList<String>();
+		
+		try {
+			textoEncriptado = Encriptar(texto);
+			textoDesencriptado = Desencriptar(textoEncriptado);
+			
+			Assert.assertEquals(texto, textoDesencriptado);
+			
+			resultado.add(texto);
+			resultado.add(textoEncriptado);
+			resultado.add(textoDesencriptado);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return resultado;
+	}
 	
 
 }
