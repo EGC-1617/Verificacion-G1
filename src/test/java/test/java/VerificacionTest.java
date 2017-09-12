@@ -169,34 +169,7 @@ public class VerificacionTest {
 	}
 	
 	
-	@Test
-	public void test5EncryptDecryptTest2Remote() throws Exception{
-		String encrypText;
-		String aux;
-		String encriptado;
-		
-		String votationId = (new BigInteger(25, new SecureRandom())).toString();
-		Integer token2 = calculateToken(new Integer(votationId));		
-		
-		idUtilizados.add(votationId);
-		
-		auth.postKey(votationId, token2);
-		
-		encrypText = "prueba prueba";
-		
 	
-		encriptado = auth.encrypt(votationId, encrypText, token2);
-		
-		//---------------------------------
-		System.out.println(encriptado);
-		String desencriptado;
-		System.out.println(encriptado.toString());
-		aux=encriptado.toString();
-		System.out.println(aux);
-		desencriptado = auth.decrypt(votationId, encriptado, token2);
-		System.out.println(desencriptado);
-		Assert.assertTrue(encrypText.equals(desencriptado));
-	}
 	
 	
 	
@@ -231,85 +204,7 @@ public class VerificacionTest {
 		
 	}
 	
-	//@Test(expected = ArrayIndexOutOfBoundsException.class)
-	@Test
-	public void test7EncryptDecryptTest3Remote() throws Exception{
-		String votationId;
-		String encrypText;
-		Integer token2;
-		String encriptado;
-		
-		votationId = (new BigInteger(25, new SecureRandom())).toString();
-		token2 = calculateToken(new Integer(votationId));		
-		
-		idUtilizados.add(votationId);
-		
-		auth.postKey(votationId, token2);
-		
-		encrypText = "";
-		
-		encriptado = auth.encrypt(votationId, encrypText, token2);
-		
-		//---------------------------------
-		
-		String desencriptado;
-		
-		desencriptado = auth.decrypt(votationId, encriptado, token2);
-		System.out.println(desencriptado);
-		
-
-	}
 	
-	@Test
-	public void test8DeleteEntriesInDatabaseRemote(){
-		Integer res = 0;
-		Connection conn = null;
-		Statement stmt = null;
-	    
-		try {	
-		
-			for(String id: idUtilizados){
-				conn = getDatabaseConnection();
-				
-				stmt = conn.createStatement();
-
-				String sql = "DELETE FROM keysvotes " +
-		                "WHERE idvotation="+id;
-				
-				PreparedStatement preparedStatement = conn.prepareStatement(sql);
-		        int r = preparedStatement.executeUpdate();
-
-		        res = res + r;
-		        
-			}
-		} catch(SQLException se) {
-	        se.printStackTrace();
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if(stmt != null)
-	                
-	            	conn.close();
-	            	System.out.println("close");
-	        
-	        } catch(SQLException se) {
-	        }
-	        try {
-	            if(conn != null)
-	                
-	            	conn.close();
-	            	System.out.println("close");
-	            	
-	        } catch(SQLException se) {
-	            se.printStackTrace();
-	        }
-	    }
-		System.out.println(res);
-		Assert.assertTrue(res == 6);
-	
-
-	}
 	
 	@Test
 	public void test9EncryptRSA() throws Exception{
@@ -405,27 +300,5 @@ public class VerificacionTest {
 		     Assert.assertTrue(test.equals(a));
 	}
 	
-	@Test
-	public void pruebaDefensaRemote() throws Exception{
-		
-		String votationId = (new BigInteger(25, new SecureRandom())).toString();
-		Integer token2 = calculateToken(new Integer(votationId));	
-		//Guardamos la id de votacion en los id utilizados
-		idUtilizados.add(votationId);
-		//Obtiene la clave publica y privada y la guarda en la base de datos
-		auth.postKey(votationId, token2);
-		
-		AuthorityImpl authority = new AuthorityImpl();
-		
-		
-		//Llamamos a la base de datos pasando el token para comprobar que han sido guardadas
-		String clavePublica = authority.getPublicKey(votationId, token2);
-		String clavePrivada = authority.getPrivateKey(votationId, token2);
-		
-		//Comprobamos que no sea null
-		Assert.assertNotNull("La clave publica es null", clavePublica);
-		Assert.assertNotNull("La clave privada es null", clavePrivada);
-		
-	}
 	
 }
