@@ -42,4 +42,8 @@ public interface Authority {
 		
 		//Recibe un texto, lo encripta y desencripta, y comprueba que es correcto.
 		public List<String> encriptarYDesencriptar (String texto);
+		
+		public  String Desencriptar(String textoEncriptado) throws Exception;
+		
+		public String Encriptar(String texto);
 }

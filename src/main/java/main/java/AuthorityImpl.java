@@ -298,7 +298,7 @@ public class AuthorityImpl implements Authority{
 	}
 
 	
-	public static String Encriptar(String texto){
+	public String Encriptar(String texto){
 		
 		String secretKey= "qualityinfoSolutions"; //llave para encriptar datos
 		String base64EncryptedString = "";
@@ -324,7 +324,7 @@ public class AuthorityImpl implements Authority{
 	
 	
 	
-	public static String Desencriptar(String textoEncriptado) throws Exception{
+	public  String Desencriptar(String textoEncriptado) throws Exception{
 		
 		String secretKey = "qualityinfoSolutions"; 
 		String base64EncryptedString = "";

@@ -449,5 +449,27 @@ public class VerificacionTestLocal {
 		
 	}
 	
+	@Test
+	public void testDefensaSeptiembreLocal() throws Exception {
+		List<String> result;
+		String textoEncriptado;
+		String textoDesencriptado;
+		List<String> resultFinal = new ArrayList<String>();
+		
+		
+		result=auth.encriptarYDesencriptar("texto de prueba");
+		textoEncriptado = auth.Encriptar("texto de prueba");
+		textoDesencriptado = auth.Desencriptar(textoEncriptado);
+		resultFinal.add("texto de prueba");
+		resultFinal.add(textoEncriptado);
+		resultFinal.add(textoDesencriptado);
+		
+		Assert.assertEquals(result.get(0), resultFinal.get(0));
+		Assert.assertEquals(result.get(1), resultFinal.get(1));
+		Assert.assertEquals(result.get(2), resultFinal.get(2));	
+	
+		
+	}
+	
 	
 }
