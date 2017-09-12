@@ -11,7 +11,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
-import org.junit.Assert;
+
 
 
 public class AuthorityImpl implements Authority{
@@ -408,8 +408,6 @@ public class AuthorityImpl implements Authority{
 		try {
 			textoEncriptado = Encriptar(texto);
 			textoDesencriptado = Desencriptar(textoEncriptado);
-			
-			Assert.assertEquals(texto, textoDesencriptado);
 			
 			resultado.add(texto);
 			resultado.add(textoEncriptado);
